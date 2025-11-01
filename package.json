@@ -1,0 +1,35 @@
+{
+  "name": "utility-apis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo of auto-generated Developer Productivity & Utility Micro APIs (managed by n8n + OpenAI).",
+  "type": "module",
+  "scripts": {
+    "bootstrap": "npm install --workspaces",
+    "test": "jest --passWithNoTests",
+    "lint": "eslint . --ext .js --max-warnings=0 || true",
+    "format": "prettier --write .",
+    "dev": "nodemon utils/index.js"
+  },
+  "workspaces": [
+    "utils/*"
+  ],
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.1.1",
+    "eslint": "^9.12.0",
+    "prettier": "^3.3.3",
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "keywords": [
+    "utility",
+    "developer-tools",
+    "automation",
+    "data-processing",
+    "microservice"
+  ]
+}
