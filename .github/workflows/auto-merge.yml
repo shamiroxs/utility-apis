@@ -1,0 +1,23 @@
+name: Auto Merge
+
+on:
+  workflow_run:
+    workflows: ["CI"]     # 👈 must match your CI workflow name exactly
+    types:
+      - completed
+
+jobs:
+  automerge:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Auto-merge PRs when CI passes
+        uses: pascalgn/automerge-action@v0.15.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MERGE_METHOD: squash           # "merge", "rebase", or "squash"
+          MERGE_LABELS: auto-merge       # only merge PRs that have this label (optional)
+          MERGE_DELETE_BRANCH: true      # delete branch after merge
+          MERGE_COMMIT_MESSAGE: pull-request-title
